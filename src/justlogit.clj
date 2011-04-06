@@ -59,7 +59,7 @@
   `(when (enabled? ~level)
      (let [s# (@*log-formatter*
                  {:timestamp (java.util.Date.)
-                  :namespace (.name *ns*)
+                  :namespace (.name ~*ns*)
                   :level (name ~level)
                   :throwable ~throwable
                   :message (format ~@args)})]

@@ -47,7 +47,7 @@
   `(let [s# (with-str-logger ~@body)
          patt# (str "\\s*" (.toUpperCase (name ~level))
                    " \\d{4}-\\d{2}-\\d{2}T\\d{2}-\\d{2}-\\d{2}.\\d{3} "
-                   "\\[.+\\]: " ~msg "\\n")
+                   "\\[justlogit-test\\]: " ~msg "\\n")
          patt# (java.util.regex.Pattern/compile patt#)]
      (is (re-matches patt# s#))))
 
@@ -55,7 +55,7 @@
   `(let [s# (with-str-logger ~@body)
          patt# (str "\\s*" (.toUpperCase (name ~level))
                    " \\d{4}-\\d{2}-\\d{2}T\\d{2}-\\d{2}-\\d{2}.\\d{3} "
-                   "\\[.+\\]: " ~msg "\\n"
+                   "\\[justlogit-test\\]: " ~msg "\\n"
                    (.getName (class ~throwable))
                    ": "
                    (.getMessage ~throwable)
