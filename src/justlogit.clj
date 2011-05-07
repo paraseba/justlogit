@@ -46,15 +46,6 @@
   (>= (or (int-level level) Integer/MAX_VALUE)
       (or (int-level @*log-level*) Integer/MIN_VALUE)))
 
-(def lock* (java.util.concurrent.locks.ReentrantLock.))
-
-(defmacro locking-log* [& body]
-  `(do
-     (.lock lock*)
-     (try
-       ~@body
-       (finally (.unlock lock*)))))
-
 (defmacro log [level throwable & args]
   `(when (enabled? ~level)
      (let [s# (@*log-formatter*
@@ -63,7 +54,7 @@
                   :level (name ~level)
                   :throwable ~throwable
                   :message (format ~@args)})]
-       (locking-log*
+       (locking @*log-writer*
          (.write @*log-writer* s#)
          (.flush @*log-writer*)))))
 
