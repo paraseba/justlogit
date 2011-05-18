@@ -94,6 +94,8 @@
   (set-log-level :warn))
 
 (deftest arguments
+  (logs-message :fatal "100% broken!" (fatal "100% broken!"))
+  (is (thrown? java.util.FormatFlagsConversionMismatchException (fatal "%s is 100% broken!" "foo")))
   (logs-message :fatal "Hi foo" (fatal "Hi %s" "foo"))
   (logs-message :fatal "Hi 1 foo" (fatal "Hi %d %s" 1 (reify Object (toString [_] "foo")))))
 
