@@ -46,6 +46,11 @@
   (>= (or (int-level level) Integer/MAX_VALUE)
       (or (int-level @*log-level*) Integer/MIN_VALUE)))
 
+(defn format-if-needed [& args]
+  (apply
+   (if (> (count args) 1) format str)
+   args))
+
 (defmacro log [level throwable & args]
   `(when (enabled? ~level)
      (let [s# (@*log-formatter*
@@ -53,7 +58,7 @@
                   :namespace (.name ~*ns*)
                   :level (name ~level)
                   :throwable ~throwable
-                  :message (format ~@args)})]
+                  :message (format-if-needed ~@args)})]
        (locking @*log-writer*
          (.write @*log-writer* s#)
          (.flush @*log-writer*)))))
