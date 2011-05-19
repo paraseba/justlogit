@@ -72,6 +72,11 @@ This function takes a map with keys: `:level`: (Keyword), `:timestamp` (java.uti
     (with-log-formatter #(str "Broken: " (:message %))
       (debug "I'm here"))
 
+## Contributors
+
+* Sebastián Galkin (@paraseba)
+* Brendan Ribera (@abscondment)
+
 ## License
 
 Copyright (C) 2011 Sebastián Galkin
