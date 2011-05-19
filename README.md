@@ -74,8 +74,8 @@ This function takes a map with keys: `:level`: (Keyword), `:timestamp` (java.uti
 
 ## Contributors
 
-* Sebastián Galkin (@paraseba)
-* Brendan Ribera (@abscondment)
+* Sebastián Galkin ([@paraseba](https://twitter.com/paraseba))
+* Brendan Ribera ([@abscondment](https://twitter.com/abscondment))
 
 ## License
 
