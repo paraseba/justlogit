@@ -29,7 +29,7 @@ If you want to log a `Throwable` instance, use:
     (try
       (danger)
       (catch Exception e
-        (warn e "So, what now")))
+        (warn-t e "So, what now")))
 
 Which will produce something like
 
