@@ -59,9 +59,10 @@
                   :level (name ~level)
                   :throwable ~throwable
                   :message (format-if-needed ~@args)})]
-       (locking @*log-writer*
-         (.write @*log-writer* s#)
-         (.flush @*log-writer*)))))
+       (io!
+         (locking @*log-writer*
+           (.write @*log-writer* s#)
+           (.flush @*log-writer*))))))
 
 (defn- def-level-macros [level]
   (let [args (gensym "args")
