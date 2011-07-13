@@ -46,7 +46,7 @@
   (>= (or (int-level level) Integer/MAX_VALUE)
       (or (int-level @*log-level*) Integer/MIN_VALUE)))
 
-(defn format-if-needed [& args]
+(defn format-if-needed* [& args]
   (apply
    (if (> (count args) 1) format str)
    args))
@@ -58,7 +58,7 @@
                   :namespace (.name ~*ns*)
                   :level (name ~level)
                   :throwable ~throwable
-                  :message (format-if-needed ~@args)})]
+                  :message (format-if-needed* ~@args)})]
        (io!
          (locking @*log-writer*
            (.write @*log-writer* s#)
