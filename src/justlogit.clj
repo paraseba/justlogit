@@ -4,9 +4,9 @@
 (defn- indexed [s]
   (map vector (iterate inc 0) s))
 
-(def ^:private levels (indexed [:trace :debug :info :warn :error :fatal]))
-(def ^:dynamic *log-level* (atom :warn))
-(def ^:dynamic *log-writer* (atom (java.io.OutputStreamWriter. System/err)))
+(def ^{:private true} levels (indexed [:trace :debug :info :warn :error :fatal]))
+(def ^{:dynamic true} *log-level* (atom :warn))
+(def ^{:dynamic true} *log-writer* (atom (java.io.OutputStreamWriter. System/err)))
 
 (defn set-log-level [level]
   (reset! *log-level* level))
@@ -31,7 +31,7 @@
       (format "%s%s%n" head (format-throwable throwable))
       head)))
 
-(def ^:dynamic *log-formatter* (atom default-formatter))
+(def ^{:dynamic true} *log-formatter* (atom default-formatter))
 
 (defn set-log-formatter [formatter]
   (reset! *log-formatter* formatter))
@@ -63,7 +63,7 @@
          (.write @*log-writer* s#)
          (.flush @*log-writer*)))))
 
-(defmacro ^:private level-macro [level]
+(defmacro ^{:private true} level-macro [level]
   (let [args (gensym "args")
         throwable (gensym "throwable")]
     `(do
