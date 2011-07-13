@@ -63,7 +63,7 @@
          (.write @*log-writer* s#)
          (.flush @*log-writer*)))))
 
-(defmacro ^{:private true} level-macro [level]
+(defn- def-level-macros [level]
   (let [args (gensym "args")
         throwable (gensym "throwable")]
     `(do
@@ -72,9 +72,7 @@
        (defmacro ~(symbol (str (name level) "-t")) [~throwable & ~args]
          `(log ~~level ~~throwable ~@~args)))))
 
-(level-macro :trace)
-(level-macro :debug)
-(level-macro :info)
-(level-macro :warn)
-(level-macro :error)
-(level-macro :fatal)
+(defmacro ^{:private true} level-macro [& levels]
+  (map def-level-macros levels))
+
+(level-macro :trace :debug :info :warn :error :fatal)
